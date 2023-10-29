@@ -1,0 +1,167 @@
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 1px solid #ccc;
+    background-color: #bec0c5;
+}
+
+
+
+.profile-image{
+    width: 124.13px;
+height: 31.261px;
+}
+
+.profile-info{
+    color: var(--black-black-90, #4D5E80);
+font-feature-settings: 'clig' off, 'liga' off;
+/* Medium/16 */
+font-family: Noto Sans;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 22px;
+}
+
+.admin-name{
+    color: var(--black-black-90, #4D5E80);
+font-feature-settings: 'clig' off, 'liga' off; 
+font-size: 18px
+}
+
+.profile-info-name{
+    /* background-color: red; */
+    margin-right: 34px;
+}
+
+.custom-box {
+    margin-top: 88px;
+  }
+  .custom-image {
+    width: 9%;
+    height: 7%;
+    background: #F7F8FA;
+    border-radius: 9999px;
+    border: 1px solid #E2E7F0;
+    margin-left: 27%;
+  }
+
+  .profile-container {
+    flex: 1;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+    margin-left: 35%;
+    margin-top: -148px;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 450px;
+    background-color: rgb(171, 166, 166);
+    padding: 22px;
+    border-radius: 20px;
+    position: relative;
+    border-radius: 5px;
+    border: 1px solid black;
+  }
+
+  .flex {
+    display: flex;
+    width: 100%;
+    gap: 6px;
+  }
+  
+  .form label {
+    position: relative;
+  }
+  
+  .form label .input {
+    /* width: 100%; */
+    /* padding: 10px 10px 20px 10px; */
+    outline: 0;
+    border: 1px solid rgba(105, 105, 105, 0.397);
+    /* border-radius: 10px; */
+  }
+  
+  .form label .input + span {
+    position: absolute;
+    left: 10px;
+    top: 15px;
+    color: grey;
+    font-size: 0.9em;
+    cursor: text;
+    transition: 0.3s ease;
+  }
+  
+  .form label .input:placeholder-shown + span {
+    top: 15px;
+    font-size: 0.9em;
+  }
+  
+  .form label .input:focus + span,
+  .form label .input:valid + span {
+    top: 30px;
+    font-size: 0.7em;
+    font-weight: 600;
+  }
+  
+  .form label .input:valid + span {
+    color: green;
+  }
+  
+
+  
+  @keyframes pulse {
+    from {
+      transform: scale(0.9);
+      opacity: 1;
+    }
+  
+    to {
+      transform: scale(1.8);
+      opacity: 0;
+    }
+  }
+  
+
+  
+  .fristname{
+      margin-top: 13%;
+  }
+  
+  .securityqst{
+      /* background-color: #194dff; */
+      font-size: 12px;
+  }
+  
+  .firstname-sec{
+    background-color: red;
+    margin-left: 99px;
+  }
+
+  .span-tag{
+    text-align: right;
+    padding: 40%;
+  }
+
+  .span-email{
+    padding: 30%;
+
+  }
+  .span-dob{
+    margin-left: 10%;
+  }
+
+  .logout-button{
+    background-color: red;
+    margin-left:  93%;
+    margin-top: 1%;
+    border-radius: 5px;
+    /* height: 10%; */
+    width: 5%;
+  }

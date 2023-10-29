@@ -3,7 +3,6 @@ import "./Login.css";
 import img from "../../assests/neokred.jpg";
 import logo from "../../assests/Logo.png";
 import axios from "axios";
-// import { useNavigate } from 'react-router-dom';
 
 function Login({ redirectToSignupPage, onLoginSuccess }) {
   const [formData, setFormData] = useState({
@@ -11,7 +10,11 @@ function Login({ redirectToSignupPage, onLoginSuccess }) {
     password: "",
   });
 
-  // const navigate = useNavigate();
+  const isEmailValid = (email) => {
+    // Simple email validation with a regular expression
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    return emailRegex.test(email);
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -20,6 +23,19 @@ function Login({ redirectToSignupPage, onLoginSuccess }) {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate email
+    if (!isEmailValid(formData.email)) {
+      window.alert("Please enter a valid email address.");
+      return;
+    }
+
+    // Validate password length
+    if (formData.password.length < 8) {
+      window.alert("Password must be at least 8 characters long.");
+      return;
+    }
+
     try {
       const response = await axios.post(
         "http://localhost:5000/api/login",
@@ -31,7 +47,6 @@ function Login({ redirectToSignupPage, onLoginSuccess }) {
         window.alert(response.data.message);
         localStorage.setItem("token", response.data.token);
         onLoginSuccess();
-        // navigate('/profile');
       } else {
         // Login failed
         console.error("Login failed:", response.data.message);
@@ -90,7 +105,7 @@ function Login({ redirectToSignupPage, onLoginSuccess }) {
                 Forgot password?
               </a>
             </div>
-            <button type="submit" on className="log-in-btn">
+            <button type="submit" className="log-in-btn">
               Login
             </button>
           </form>

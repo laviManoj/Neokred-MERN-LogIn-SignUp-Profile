@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import "./Profile.css";
 import logo from "../../assests/Logo.png";
 import manoj from "../../assests/Manoj.png";
-// import { useNavigate } from "react-router-dom"; // Import useNavigate
+// import { useNavigate } from "react-router-dom";
 
 function Profile({ handleLogout }) {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  // const navigate = useNavigate(); // Use navigate to redirect
+  // const navigate = useNavigate();
 
   useEffect(() => {
-    const apiUrl = "http://localhost:5000/api/profileinfo"; // Replace with your API endpoint
+    const apiUrl = "http://localhost:5000/api/profileinfo";
 
     fetch(apiUrl)
       .then((response) => response.json())
@@ -25,10 +25,10 @@ function Profile({ handleLogout }) {
   }, []);
 
   const handleLogoutClick = () => {
-    localStorage.removeItem('token'); // Remove the token from local storage
+    localStorage.removeItem("token");
     handleLogout(); // Logout the user
-    // navigate('/login'); // Redirect to the login page
-  }
+    // navigate('/login');
+  };
 
   return (
     <div>
@@ -40,7 +40,9 @@ function Profile({ handleLogout }) {
           <h5 className="admin-name">Admin</h5>
         </div>
       </div>
-      <button onClick={handleLogoutClick} className="logout-button">Logout</button>
+      <button onClick={handleLogoutClick} className="logout-button">
+        Logout
+      </button>
       <div class="custom-box">
         <img className="custom-image" src={manoj} alt="" />
       </div>
@@ -49,57 +51,39 @@ function Profile({ handleLogout }) {
           <h1>Profile</h1>
           <div className="flex">
             Firstname:
-            <label>
-              {data.firstname}
-            </label>
+            <label>{data.firstname}</label>
           </div>
           <div className="flex">
             Email:
-            <label>
-              {data.email}
-            </label>
+            <label>{data.email}</label>
           </div>
           <div className="flex">
             Date of Birth:
-            <label>
-              {data.dob}
-            </label>
+            <label>{data.dob}</label>
           </div>
           <div className="flex">
             Phone Number:
-            <label>
-              {data.phone}
-            </label>
+            <label>{data.phone}</label>
           </div>
           <div className="flex">
             Address:
-            <label>
-              {data.address}
-            </label>
+            <label>{data.address}</label>
           </div>
           <div className="flex">
             City:
-            <label>
-              {data.city}
-            </label>
+            <label>{data.city}</label>
           </div>
           <div className="flex">
             State:
-            <label>
-              {data.state}
-            </label>
+            <label>{data.state}</label>
           </div>
           <div className="flex">
             Zip Code:
-            <label>
-              {data.Zipcode}
-            </label>
+            <label>{data.Zipcode}</label>
           </div>
           <div className="flex">
             Country:
-            <label>
-              {data.country}
-            </label>
+            <label>{data.country}</label>
           </div>
         </form>
       </div>

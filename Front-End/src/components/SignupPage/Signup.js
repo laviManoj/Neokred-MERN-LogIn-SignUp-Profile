@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-// import React from 'react';
 import "./Signup.css";
 import img from "../../assests/neokred.jpg";
 import logo from "../../assests/Logo.png";
 import axios from "axios";
-// import { useNavigate } from 'react-router-dom';
 
-function RegistrationForm({ redirectToLoginPage,navigateToProfile }) {
+function RegistrationForm({ redirectToLoginPage, navigateToProfile }) {
   const [formData, setFormData] = useState({
     firstname: "",
     email: "",
@@ -19,57 +17,114 @@ function RegistrationForm({ redirectToLoginPage,navigateToProfile }) {
     city: "",
     country: "",
     zipcode: "",
-    state:""
+    state: "",
   });
+
+  const [errors, setErrors] = useState({});
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // const navigate = useNavigate();
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Validation checks for each field
+    if (!formData.firstname.match(/^[a-zA-Z ]+$/)) {
+      newErrors.firstname =
+        "First name should contain alphabetic characters only";
+    }
+
+    if (!formData.email.match(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/)) {
+      newErrors.email = "Invalid email format";
+    }
+
+    if (
+      formData.password.length < 8 ||
+      !/[A-Z]/.test(formData.password) ||
+      !/\d/.test(formData.password)
+    ) {
+      newErrors.password =
+        "Password must be at least 8 characters and contain at least one uppercase letter and one digit";
+    }
+
+    if (formData.confirmPassword !== formData.password) {
+      newErrors.confirmPassword = "Passwords do not match";
+    }
+
+    if (!formData.dob) {
+      newErrors.dob = "Date of Birth is required";
+    }
+
+    if (!formData.phone.match(/^\d{10}$/)) {
+      newErrors.phone = "Invalid phone number format";
+    }
+
+    if (!formData.address) {
+      newErrors.address = "Address is required";
+    }
+
+    if (!formData.city.match(/^[a-zA-Z ]+$/)) {
+      newErrors.city = "City should contain alphabetic characters only";
+    }
+
+    if (!formData.state) {
+      newErrors.state = "State is required";
+    }
+
+    if (!formData.zipcode.match(/^\d{6}$/)) {
+      newErrors.zipcode = "Invalid zip code format";
+    }
+
+    if (!formData.country) {
+      newErrors.country = "Country is required";
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Create an object with the form data
+    const isFormValid = validateForm();
 
-    const data = {
-      dateofbirth: formData.dateofbirth,
-      Zipcode: formData.zipcode,
-      firstname: formData.firstname,
-      email: formData.email,
-      password: formData.password,
-      confirm: formData.confirmPassword,
-      phone: formData.phone,
-      question: formData.question,
-      dob: formData.dob,
-      country: formData.country,
-      city: formData.city,
-      address: formData.address,
-      state: formData.state
-      // Add other form fields here
-    };
+    if (isFormValid) {
+      const data = {
+        dateofbirth: formData.dob,
+        Zipcode: formData.zipcode,
+        firstname: formData.firstname,
+        email: formData.email,
+        password: formData.password,
+        confirm: formData.confirmPassword,
+        phone: formData.phone,
+        question: formData.question,
+        dob: formData.dob,
+        country: formData.country,
+        city: formData.city,
+        address: formData.address,
+        state: formData.state,
+      };
 
-    // Make a POST request to your backend API endpoint
-    axios
-      .post("http://localhost:5000/api/register", data)
-      .then((response) => {
-        // Handle the success response from the server
-        console.log("Form data sent successfully:", response.data);
-        window.alert(response.data.message)
-        localStorage.setItem('token', response.data.token);
+      axios
+        .post("http://localhost:5000/api/register", data)
+        .then((response) => {
+          console.log("Form data sent successfully:", response.data);
+          window.alert(response.data.message);
+          localStorage.setItem("token", response.data.token);
 
-        navigateToProfile();
-        // navigate('/profile');
-      })
-      .catch((error) => {
-        // Handle errors here, such as network issues or server errors
-        console.error("Error sending form data:", error);
-      });
+          navigateToProfile();
+        })
+        .catch((error) => {
+          console.error("Error sending form data:", error);
+        });
+    }
   };
+
   return (
     <div className="signup-container">
       <div className="signup-image-container">
-        {/* Your image goes here */}
         <img src={img} alt="signup-Image" />
         <img src={logo} alt="signup-Image2" className="signup-page-logo" />
       </div>
@@ -90,6 +145,7 @@ function RegistrationForm({ redirectToLoginPage,navigateToProfile }) {
                 value={formData.firstname}
                 onChange={handleInputChange}
               />
+              {errors.firstname && <p className="error">{errors.firstname}</p>}
             </label>
             <label>
               <span>Email:</span>
@@ -102,8 +158,10 @@ function RegistrationForm({ redirectToLoginPage,navigateToProfile }) {
                 value={formData.email}
                 onChange={handleInputChange}
               />
+              {errors.email && <p className="error">{errors.email}</p>}
             </label>
           </div>
+
           <div className="flex">
             <label>
               <span>Password:</span>
@@ -116,6 +174,7 @@ function RegistrationForm({ redirectToLoginPage,navigateToProfile }) {
                 value={formData.password}
                 onChange={handleInputChange}
               />
+              {errors.password && <p className="error">{errors.password}</p>}
             </label>
             <label>
               <span>Confirm password:</span>
@@ -128,11 +187,15 @@ function RegistrationForm({ redirectToLoginPage,navigateToProfile }) {
                 value={formData.confirmPassword}
                 onChange={handleInputChange}
               />
+              {errors.confirmPassword && (
+                <p className="error">{errors.confirmPassword}</p>
+              )}
             </label>
           </div>
+
           <div className="flex">
             <label>
-              <span>Date fo Birth:</span>
+              <span>Date of Birth:</span>
               <input
                 required
                 placeholder="06/12/2023"
@@ -142,6 +205,7 @@ function RegistrationForm({ redirectToLoginPage,navigateToProfile }) {
                 value={formData.dob}
                 onChange={handleInputChange}
               />
+              {errors.dob && <p className="error">{errors.dob}</p>}
             </label>
             <label>
               <span>Phone Number:</span>
@@ -154,8 +218,10 @@ function RegistrationForm({ redirectToLoginPage,navigateToProfile }) {
                 value={formData.phone}
                 onChange={handleInputChange}
               />
+              {errors.phone && <p className="error">{errors.phone}</p>}
             </label>
           </div>
+
           <div className="flex">
             <label>
               <span>Security Question:</span>
@@ -171,6 +237,7 @@ function RegistrationForm({ redirectToLoginPage,navigateToProfile }) {
               />
             </label>
           </div>
+
           <div className="flex">
             <label>
               <h6>Address</h6>
@@ -183,8 +250,10 @@ function RegistrationForm({ redirectToLoginPage,navigateToProfile }) {
                 value={formData.address}
                 onChange={handleInputChange}
               />
+              {errors.address && <p className="error">{errors.address}</p>}
             </label>
           </div>
+
           <div className="flex">
             <label>
               <h6>City</h6>
@@ -197,6 +266,7 @@ function RegistrationForm({ redirectToLoginPage,navigateToProfile }) {
                 value={formData.city}
                 onChange={handleInputChange}
               />
+              {errors.city && <p className="error">{errors.city}</p>}
             </label>
             <label>
               <h6>State</h6>
@@ -209,11 +279,12 @@ function RegistrationForm({ redirectToLoginPage,navigateToProfile }) {
                 value={formData.state}
                 onChange={handleInputChange}
               />
+              {errors.state && <p className="error">{errors.state}</p>}
             </label>
-            
           </div>
+
           <div className="flex">
-          <label>
+            <label>
               <h6>Zip Code</h6>
               <input
                 required
@@ -224,8 +295,9 @@ function RegistrationForm({ redirectToLoginPage,navigateToProfile }) {
                 value={formData.zipcode}
                 onChange={handleInputChange}
               />
+              {errors.zipcode && <p className="error">{errors.zipcode}</p>}
             </label>
-          <label>
+            <label>
               <h6>Country</h6>
               <input
                 required
@@ -236,6 +308,7 @@ function RegistrationForm({ redirectToLoginPage,navigateToProfile }) {
                 value={formData.country}
                 onChange={handleInputChange}
               />
+              {errors.country && <p className="error">{errors.country}</p>}
             </label>
           </div>
 

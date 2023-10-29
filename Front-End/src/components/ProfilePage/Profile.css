@@ -7,9 +7,6 @@
     border-radius: 1px solid #ccc;
     background-color: #bec0c5;
 }
-
-
-
 .profile-image{
     width: 124.13px;
 height: 31.261px;
@@ -114,7 +111,6 @@ font-size: 18px
     color: green;
   }
   
-
   
   @keyframes pulse {
     from {
@@ -127,8 +123,6 @@ font-size: 18px
       opacity: 0;
     }
   }
-  
-
   
   .fristname{
       margin-top: 13%;

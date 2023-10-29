@@ -45,8 +45,6 @@ line-height: 27px; /* 135% */
 }
 .log-in{
   color: var(--black-black-20, #131926);
-
-/* Semibold/36 */
 font-family: Noto Sans;
 font-size: 36px;
 font-style: normal;
@@ -57,14 +55,11 @@ line-height: 40px; /* 111.111% */
 .email-label{
   color: var(--black-black-90, #4D5E80);
 font-feature-settings: 'clig' off, 'liga' off;
-
-/* Regular/16 */
 font-family: Noto Sans;
 font-size: 16px;
 font-style: normal;
 font-weight: 400;
 line-height: 22px; /* 137.5% */
-
 
 }
 .start{

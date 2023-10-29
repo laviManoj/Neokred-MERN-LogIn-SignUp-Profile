@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
-import './Login.css';
-import img from '../../assests/neokred.jpg';
-import logo from '../../assests/Logo.png';
-import axios from 'axios';
+import React, { useState } from "react";
+import "./Login.css";
+import img from "../../assests/neokred.jpg";
+import logo from "../../assests/Logo.png";
+import axios from "axios";
 // import { useNavigate } from 'react-router-dom';
-
 
 function Login({ redirectToSignupPage, onLoginSuccess }) {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
-  // const navigate = useNavigate(); 
+  // const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -22,26 +21,27 @@ function Login({ redirectToSignupPage, onLoginSuccess }) {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/login', formData);
+      const response = await axios.post(
+        "http://localhost:5000/api/login",
+        formData
+      );
       if (response.data.success) {
         // Login successful
-        console.log('Login successful:', response.data);
+        console.log("Login successful:", response.data);
         window.alert(response.data.message);
-        localStorage.setItem('token', response.data.token);
+        localStorage.setItem("token", response.data.token);
         onLoginSuccess();
         // navigate('/profile');
-        // Redirect to the profile page using your routing mechanism
       } else {
-        // Login failed (user not found or incorrect password)
-        console.error('Login failed:', response.data.message);
+        // Login failed
+        console.error("Login failed:", response.data.message);
         window.alert(response.data.message);
       }
     } catch (error) {
-      console.error('Error:', error);
-      window.alert('An error occurred during login');
+      console.error("Error:", error);
+      window.alert("An error occurred during login");
     }
   };
-  
 
   return (
     <div className="app-container">
@@ -69,7 +69,10 @@ function Login({ redirectToSignupPage, onLoginSuccess }) {
               />
             </div>
             <div className="block relative">
-              <label htmlFor="password" className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
+              <label
+                htmlFor="password"
+                className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2"
+              >
                 Password<span className="start">*</span>
               </label>
               <input
@@ -92,7 +95,7 @@ function Login({ redirectToSignupPage, onLoginSuccess }) {
             </button>
           </form>
           <div className="text-sm text-center mt-[1.6rem]">
-            Don’t have an account?{' '}
+            Don’t have an account?{" "}
             <button className="sign-up" onClick={() => redirectToSignupPage()}>
               Sign up!
             </button>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Profile.css";
-import logo from "./Logo1.png";
-import manoj from "./Manoj.png";
+import logo from "../../assests/Logo.png";
+import manoj from "../../assests/Manoj.png";
 // import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 function Profile({ handleLogout }) {

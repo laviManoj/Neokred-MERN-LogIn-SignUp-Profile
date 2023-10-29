@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 // import React from 'react';
 import "./Signup.css";
-import img from "./neolard.jpg";
-import logo from "./Logo1.png";
+import img from "../../assests/neokred.jpg";
+import logo from "../../assests/Logo.png";
 import axios from "axios";
 // import { useNavigate } from 'react-router-dom';
 

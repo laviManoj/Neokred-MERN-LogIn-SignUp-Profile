@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import LoginPage from './components/Login';
-import SignupPage from './components/Signup';
-import ProfilePage from './components/Profile';
+import LoginPage from './components/LoginPage/Login';
+import SignupPage from './components/SignupPage/Signup';
+import ProfilePage from './components/ProfilePage/Profile';
 
 function App() {
   const [showLogin, setShowLogin] = useState(true);

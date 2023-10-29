@@ -1,6 +1,5 @@
-const User = require('../models/user'); // Assuming you have a User model
+const User = require("../models/user");
 
-// Controller for handling login
 const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -9,18 +8,18 @@ const login = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user) {
-      // Check the password (you should use a secure password hashing method)
+      // Validating
       if (user.password === password) {
-        res.json({ success: true, message: 'Login successful' });
+        res.json({ success: true, message: "Login successful" });
       } else {
-        res.json({ success: false, message: 'Incorrect password' });
+        res.json({ success: false, message: "Incorrect password" });
       }
     } else {
-      res.json({ success: false, message: 'User not found' });
+      res.json({ success: false, message: "User not found" });
     }
   } catch (err) {
     console.error(err);
-    res.status(500).json({ success: false, message: 'Internal server error' });
+    res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
 

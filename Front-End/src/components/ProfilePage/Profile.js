@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import "./Profile.css";
 import logo from "../../assests/Logo.png";
 import manoj from "../../assests/Manoj.png";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function Profile({ handleLogout }) {
+function Profile() {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  // const navigate = useNavigate();
+   const navigate = useNavigate();
 
   useEffect(() => {
     const apiUrl = "http://localhost:5000/api/profileinfo";
@@ -26,8 +26,8 @@ function Profile({ handleLogout }) {
 
   const handleLogoutClick = () => {
     localStorage.removeItem("token");
-    handleLogout(); // Logout the user
-    // navigate('/login');
+   // Logout the user
+    navigate('/login');
   };
 
   return (

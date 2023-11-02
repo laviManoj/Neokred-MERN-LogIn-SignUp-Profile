@@ -3,8 +3,10 @@ import "./Signup.css";
 import img from "../../assests/neokred.jpg";
 import logo from "../../assests/Logo.png";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
-function RegistrationForm({ redirectToLoginPage, navigateToProfile }) {
+
+function RegistrationForm() {
   const [formData, setFormData] = useState({
     firstname: "",
     email: "",
@@ -26,7 +28,7 @@ function RegistrationForm({ redirectToLoginPage, navigateToProfile }) {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
-
+  const navigate = useNavigate();
   const validateForm = () => {
     const newErrors = {};
 
@@ -114,7 +116,7 @@ function RegistrationForm({ redirectToLoginPage, navigateToProfile }) {
           window.alert(response.data.message);
           localStorage.setItem("token", response.data.token);
 
-          navigateToProfile();
+          navigate('/Profile');
         })
         .catch((error) => {
           console.error("Error sending form data:", error);
@@ -317,7 +319,7 @@ function RegistrationForm({ redirectToLoginPage, navigateToProfile }) {
           </button>
           <p className="signin">
             Already have an account?{" "}
-            <button className="sign-up" onClick={() => redirectToLoginPage()}>
+            <button className="sign-up" >
               Sign in
             </button>
           </p>

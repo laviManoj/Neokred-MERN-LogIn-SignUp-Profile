@@ -3,8 +3,9 @@ import "./Login.css";
 import img from "../../assests/neokred.jpg";
 import logo from "../../assests/Logo.png";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
-function Login({ redirectToSignupPage, onLoginSuccess }) {
+function Login() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -46,7 +47,7 @@ function Login({ redirectToSignupPage, onLoginSuccess }) {
         console.log("Login successful:", response.data);
         window.alert(response.data.message);
         localStorage.setItem("token", response.data.token);
-        onLoginSuccess();
+        navigate('/Signup');
       } else {
         // Login failed
         console.error("Login failed:", response.data.message);
@@ -57,6 +58,8 @@ function Login({ redirectToSignupPage, onLoginSuccess }) {
       window.alert("An error occurred during login");
     }
   };
+
+  const navigate = useNavigate();
 
   return (
     <div className="app-container">
@@ -110,8 +113,8 @@ function Login({ redirectToSignupPage, onLoginSuccess }) {
             </button>
           </form>
           <div className="text-sm text-center mt-[1.6rem]">
-            Don’t have an account?{" "}
-            <button className="sign-up" onClick={() => redirectToSignupPage()}>
+            Don’t have an account?
+            <button className="sign-up">
               Sign up!
             </button>
           </div>
